@@ -1,97 +1,118 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## User Preferences App – React Context API Demo
 
-# Getting Started
+This is a React Native mobile application that demonstrates how to use the React Context API to manage global state without using prop drilling.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+The app allows users to:
+    - Switch between Light and Dark mode
+    - Change language between English and Filipino
+    - Save preferences using AsyncStorage so settings stay even after closing the app
 
-## Step 1: Start Metro
+## Features
+    - Theme Toggle (Light / Dark Mode)
+    - Language Selection (English / Filipino)
+    - Global State Management using React Context API
+    - AsyncStorage for saving user preferences
+    - No Prop Drilling (uses useContext() hook)
+    - UI automatically updates based on selected theme
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Project Structure
+agbingOBT3/
+├── contexts/
+│   ├── ThemeContext.tsx
+│   └── LanguageContext.tsx
+├── components/
+│   ├── Header.tsx
+│   ├── Content.tsx
+│   └── Footer.tsx
+├── App.tsx
+└── package.json
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Requirements
+Make sure you have:
+    1. Node.js (v20 or higher)
+    2. npm or yarn
+    3. React Native environment setup
+    4. Android Studio (for Android)
+    5. Xcode (for iOS – Mac only)
 
-```sh
-# Using npm
-npm start
+## Installation
+Install dependencies:
+- npm install
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+## Running the App
+Android
 npm run android
 
-# OR using Yarn
-yarn android
-```
+OR
 
-### iOS
+npx react-native run-android
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+iOS (Mac only)
 npm run ios
 
-# OR using Yarn
-yarn ios
-```
+OR
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+npx react-native run-ios
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Start Metro (if needed)
+npm start
 
-## Step 3: Modify your app
+## How Context API Was Used
+Theme Context
+Handles:
+    Current theme (light or dark)
+    Toggle theme function
+    Saves theme using AsyncStorage
 
-Now that you have successfully run the app, let's make changes!
+Usage:
+    const { theme, toggleTheme } = useTheme();
+    Language Context
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Handles:
+    Current language (English or Filipino)
+    Change language function
+    Saves language using AsyncStorage
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Usage:
+    const { language, changeLanguage } = useLanguage();
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Context Providers
+In App.tsx, both contexts wrap the whole app:
 
-## Congratulations! :tada:
+<ThemeProvider>
+  <LanguageProvider>
+    <AppContent />
+  </LanguageProvider>
+</ThemeProvider>
 
-You've successfully run and modified your React Native App. :partying_face:
 
-### Now what?
+This allows all components to access global state without passing props.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## Components Overview
+Header
+    - Shows app title
+Contains theme toggle switch
+    - Changes text based on selected language
+Content
+    - Shows greeting message
+Language selection dropdown
+    - App description text
+Footer
+    - Displays current theme and language
+    - Updates automatically when state changes
 
-# Troubleshooting
+## Why Context API Was Used
+Avoids prop drilling
+Makes code cleaner
+Easy to manage global settings
+Better structure for bigger apps
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## Testing
+Run tests:
+npm test
 
-# Learn More
+## License
+This project is created for educational purposes as part of a React Context API demonstration.
 
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Author
+Created as a demonstration of React Context API for managing global state in React Native applications.
